@@ -1,0 +1,184 @@
+<html>
+
+<head>
+	<title>Login</title>
+	<script>
+		function onInputChange(event) {
+			const { name } = event.target;
+			const inputErrorElement = document.getElementById(`${name}-error`);
+			const formErrorElement = document.getElementById('form-error');
+
+			if (inputErrorElement.innerText) {
+				inputErrorElement.innerText = '';
+			}
+			if (formErrorElement.innerText) {
+				formErrorElement.innerText = '';
+			}
+		}
+
+		function onSubmit(event) {
+			event.preventDefault();
+			document.getElementById('form-error').innerText = '';
+			document.getElementById('username-error').innerText = '';
+			document.getElementById('password-error').innerText = '';
+
+			const username = document.getElementById('username').value;
+			const password = document.getElementById('password').value;
+
+			if (!username || !username.length) {
+				document.getElementById('username-error').innerText =
+					'Username cannot be empty.';
+				return;
+			}
+
+			if (!password || !password.length) {
+				document.getElementById('password-error').innerText =
+					'Password cannot be empty.';
+				return;
+			}
+
+			const formData = new FormData();
+			formData.append('username', username);
+			formData.append('password', password);
+
+			fetch('/api/login', {
+				body: formData,
+				method: 'POST'
+			})
+				.then((response) => {
+					if (response.status === 200) {
+						window.location.href = '/sales';
+					} else {
+						document.getElementById('form-error').innerText =
+							'Invalid username/password';
+						response.json().then((body) => {
+							console.log('Error resp ::: ', body);
+						});
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+					document.getElementById('form-error').innerText =
+						'Invalid username/password';
+				});
+		}
+
+	</script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		button {
+			outline: none;
+		}
+
+		body {
+			width: 100vw;
+			height: 100vh;
+			padding: 20px;
+			background-color: #f4f4f4;
+			font-family: Arial, sans-serif;
+		}
+
+		.container--center {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.card {
+			width: 450px;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.card__title {
+			font-size: 24px;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		.form {
+			margin-bottom: 20px;
+		}
+
+		.form__group {
+			margin-bottom: 20px;
+		}
+
+		.form__error {
+			margin-top: 5px;
+			font-size: 14px;
+			color: #ed4337;
+			text-align: center;
+		}
+
+		.input {
+			width: 100%;
+			padding: 10px;
+			font-size: 16px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+
+		.input__label {
+			font-weight: bold;
+			color: #666;
+		}
+
+		.input__error {
+			margin-top: 5px;
+			font-size: 14px;
+			color: #ed4337;
+		}
+
+		.button {
+			width: 100%;
+			padding: 12px;
+			background-color: #4caf50;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+			transition: background-color 0.3s ease;
+		}
+
+		.button:hover {
+			background-color: #45a049;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container--center">
+		<div class="card">
+			<h1 class="card__title">Application Login</h1>
+			<form class="form">
+				<div class="form__group">
+					<label for="username" class="input__label">Username:</label>
+					<input type="text" id="username" class="input" name="username" autocomplete="off"
+						onkeyup="onInputChange(event)" placeholder="Enter your username" />
+					<p id="username-error" class="input__error"></p>
+				</div>
+				<div class="form__group">
+					<label for="password" class="input__label">Password</label>
+					<input type="password" id="password" name="password" class="input" autocomplete="off"
+						onkeyup="onInputChange(event)" placeholder="Enter your password" />
+					<p id="password-error" class="input__error"></p>
+				</div>
+				<button type="button" class="button" onclick="onSubmit(event)">Login</button>
+				<p id="form-error" class="form__error"></p>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

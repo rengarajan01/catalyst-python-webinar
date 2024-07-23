@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Data Charts</title>
+    <style>
+        canvas {
+            width: 600px !important;
+            height: 600px !important;
+        }
+
+        .graph-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>Lead Data Charts</h1>
+    <div class="graph-grid">
+        <canvas id="leadSourceDistributionChart" width="100px" height="100px"></canvas>
+        <canvas id="topCompaniesChart" width="100px" height="100px"></canvas>
+        <canvas id="topEmailDomainsChart" width="100px" height="100px"></canvas>
+        <canvas id="contactsPerCompanyChart" width="100px" height="100px"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const data = {{ data| tojson
+        }};
+        
+
+        // Lead Source Distribution - Pie Chart
+        const leadSourceDistributionCtx = document.getElementById('leadSourceDistributionChart').getContext('2d');
+        new Chart(leadSourceDistributionCtx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(data.lead_source_distribution),
+                datasets: [{
+                    label: 'Lead Source Distribution',
+                    data: Object.values(data.lead_source_distribution),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 24 
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Top Companies by Number of Leads',
+                        font: {
+                            size: 30 
+                        }
+                    }
+                }
+            }
+        });
+
+        // Top Companies - Bar Graph
+        const topCompaniesCtx = document.getElementById('topCompaniesChart').getContext('2d');
+        new Chart(topCompaniesCtx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(data.top_companies),
+                datasets: [{
+                    label: 'Top Companies by Number of Leads',
+                    data: Object.values(data.top_companies),
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 24 
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Top Companies by Number of Leads',
+                        font: {
+                            size: 30 
+                        }
+                    }
+                }
+            }
+        });
+
+        // Top Email Domains - Bar Graph
+        const topEmailDomainsCtx = document.getElementById('topEmailDomainsChart').getContext('2d');
+        new Chart(topEmailDomainsCtx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(data.top_email_domains),
+                datasets: [{
+                    label: 'Top Email Domains',
+                    data: Object.values(data.top_email_domains),
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 24 
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Top Companies by Number of Leads',
+                        font: {
+                            size: 30 
+                        }
+                    }
+                }
+            }
+        });
+
+       
+
+        // Contacts per Company - Histogram
+        const contactsPerCompanyCtx = document.getElementById('contactsPerCompanyChart').getContext('2d');
+        new Chart(contactsPerCompanyCtx, {
+            type: 'bar',
+            data: {
+                labels: data.contacts_per_company.map(item => item[0]),
+                datasets: [{
+                    label: 'Number of Contacts per Company',
+                    data: data.contacts_per_company.map(item => item[1]),
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 24 // Set the font size for the legend
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Top Companies by Number of Leads',
+                        font: {
+                            size: 30 // Set the font size for the title
+                        }
+                    }
+                }
+            }
+        });
+        });
+    </script>
+</body>
+
+</html>

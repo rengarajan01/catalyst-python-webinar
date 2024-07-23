@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Sales Report Generator</title>
+	<script>
+
+		function downloadImage(dataUri, filename) {
+			const a = document.createElement('a');
+			a.href = dataUri;
+			a.download = filename;
+
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		}
+
+		document.getElementById('downloadButton1').addEventListener('click', function () {
+			const dataUri = document.getElementById('image1').getAttribute('src');
+			downloadImage(dataUri, 'image1.png');
+		});
+
+		document.getElementById('downloadButton2').addEventListener('click', function () {
+			const dataUri = document.getElementById('image2').getAttribute('src');
+			downloadImage(dataUri, 'image2.png');
+		});
+
+		document.getElementById('downloadButton3').addEventListener('click', function () {
+			const dataUri = document.getElementById('image3').getAttribute('src');
+			downloadImage(dataUri, 'image3.png');
+		});
+	</script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: "Arial", sans-serif;
+			background-color: #f0f0f0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		.container {
+			background-color: #fff;
+			padding: 30px;
+			border-radius: 5px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			width: 400px;
+		}
+
+		h1 {
+			text-align: center;
+			margin-bottom: 20px;
+			color: #333;
+		}
+
+		.report-form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.form-group {
+			margin-bottom: 20px;
+		}
+
+		label {
+			font-weight: bold;
+			color: #666;
+		}
+
+		input[type="file"] {
+			width: 100%;
+			padding: 10px;
+			font-size: 16px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+
+		button[type="submit"] {
+			width: 100%;
+			padding: 12px;
+			background-color: #4caf50;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+			transition: background-color 0.3s ease;
+		}
+
+		button[type="submit"]:hover {
+			background-color: #45a049;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Sales Report Generator</h1>
+		<form action="/api/generate_report" method="post" enctype="multipart/form-data" class="report-form">
+			<div class="form-group">
+				<label for="csv_file">Upload CSV File:</label>
+				<input type="file" id="csv_file" name="csv_file" accept=".csv" />
+			</div>
+			<div class="form-group">
+				<button type="submit">Generate Report</button>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
