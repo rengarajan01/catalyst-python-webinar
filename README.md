@@ -32,20 +32,30 @@ This application will use the following Catalyst components:
 To deploy this application to your Catalyst account, follow these steps:
 
 1. Download the code using the following command:
-   `git clone https://github.com/rengarajan01/catalyst-python-webinar.git`
+   ```
+   git clone https://github.com/rengarajan01/catalyst-python-webinar.git
+   ```
 2. Once downloaded, navigate to the `appsail-python` directory and create a virtual environment with the following command:
-   `python -m venv .venv`
+   ```
+   python -m venv .venv
+   ```
 3. After creating the virtual environment, activate it with the following command:
-   `source .venv/bin/activate`
+   ```
+   source .venv/bin/activate
+   ```
 4. Install the dependencies with the following command:
-   `pip install -r requirements.txt`
+   ```
+   pip install -r requirements.txt
+   ```
 5. Once the dependencies are installed, go to the [Catalyst console](https://console.catalyst.zoho.com "Catalyst by Zoho"), create a new project, and navigate to CloudScale -> Datastore -> Create Table.
 6. Create a table named "Users" with the columns "USERNAME" (data type: text) and "PASSWORD" (data type: Encrypted Text).
 7. Go to Data View and insert a new record for the username and password.
 8. In your local environment, initialize the Catalyst project inside your `appsail-python` directory. Once Appsail is initialized with Appsail and Python 3.9 as the runtime, replace the value for the key `command` inside `app-config.json` with:
-   `python app.py`
+   ```
+   python app.py
+   ```
 9. You can now serve the application locally with the `catalyst serve` command or deploy the application with the `catalyst deploy` command.
-   Use [this file](https://workdrive.zohoexternal.com/file/29ha122f797b7e7704e00938cd51c74bfd4f6 "Test CSV File") for your testing.
+10. Use [this file](https://workdrive.zohoexternal.com/file/29ha122f797b7e7704e00938cd51c74bfd4f6 "Test CSV File") for your testing.
 
 [Live demo](https://appsail-10085182734.development.catalystappsail.com/ "Python App")
 
