@@ -5,7 +5,6 @@ class CheckUser:
         pass
 
     def get_user(self, request):
-        print(":: Inside ::")
         catalystApp = catalyst.initialize(req=request)
         username = request.form["username"]
         password = request.form["password"]

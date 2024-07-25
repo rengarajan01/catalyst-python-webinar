@@ -1,15 +1,12 @@
 import sys
 sys.path.insert(0, '.venv/lib/python3.9/site-packages')
 
-
 import os
 from flask import Flask, render_template,request, send_from_directory
 from main.catalyst import CheckUser
 from main.newgraph import NewGraph
 
 app = Flask(__name__)
-
-
 
 @app.route("/")
 def load_login_html():

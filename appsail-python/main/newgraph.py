@@ -13,11 +13,7 @@ class NewGraph:
         reader = csv.DictReader(csvfile)
         for row in reader:
             data.append(row)
-        # with open(csv_file, newline='') as csvfile:
-        #     reader = csv.DictReader(csv_file)
-        #     for row in reader:
-        #         data.append(row)
-
+            
         # Helper function to extract data
         def get_column(data, column_name):
             return [row[column_name] for row in data]
@@ -62,9 +58,3 @@ class NewGraph:
         }
 
         return output_data
-
-        # Save the data to a JSON file
-        # with open('output_data.json', 'w') as jsonfile:
-        #     json.dump(output_data, jsonfile, indent=4)
-
-        # print("Data has been extracted and saved to 'output_data.json'.")
