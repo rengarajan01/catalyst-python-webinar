@@ -5,33 +5,6 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Sales Report Generator</title>
-	<script>
-
-		function downloadImage(dataUri, filename) {
-			const a = document.createElement('a');
-			a.href = dataUri;
-			a.download = filename;
-
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		}
-
-		document.getElementById('downloadButton1').addEventListener('click', function () {
-			const dataUri = document.getElementById('image1').getAttribute('src');
-			downloadImage(dataUri, 'image1.png');
-		});
-
-		document.getElementById('downloadButton2').addEventListener('click', function () {
-			const dataUri = document.getElementById('image2').getAttribute('src');
-			downloadImage(dataUri, 'image2.png');
-		});
-
-		document.getElementById('downloadButton3').addEventListener('click', function () {
-			const dataUri = document.getElementById('image3').getAttribute('src');
-			downloadImage(dataUri, 'image3.png');
-		});
-	</script>
 	<style>
 		* {
 			margin: 0;
